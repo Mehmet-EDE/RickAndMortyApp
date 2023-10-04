@@ -14,7 +14,14 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
+    screens: {
+      rsm: { "max": "615px" },
+      rmd:{"max":"767px"},
+      rlg:{"max":"1270px"},
+      renemy:{"max":"13065px"},
+    },
   },
+  
   plugins: [],
 }
 export default config

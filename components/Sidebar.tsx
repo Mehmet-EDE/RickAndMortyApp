@@ -1,14 +1,18 @@
 
 import Image from "next/image"
 import Link from "next/link"
-function Sidebar() {
+
+interface SidebarProps {
+    hide?: boolean
+}
+function Sidebar({ hide }: SidebarProps) {
+    if (hide) return (<div />)
     return (
-        <div
-            className="w-[250px]  h-screen bg-black sticky top-0 overflow-hidden flex items-start justify-center">
-            <div
-                className="w-24 h-24 rounded-full bg-red overflow-hidden z-20 mt-14 border-[5px] border-white"
+        <div className={`rsm:hidden w-[250px]  h-screen bg-black sticky top-0 overflow-hidden flex items-start justify-center`}>
+            <div className=" rsm:hidden w-24 h-24 rounded-full bg-red overflow-hidden z-20 mt-14 border-[5px] border-white"
             >
-                <Image src="/pp.png"
+                <Image
+                    src="/pp.png"
                     layout="fill"
                     objectFit="cover"
                     alt="" />
@@ -16,7 +20,7 @@ function Sidebar() {
             <ul className="absolute top-72 left-5 items-center justify-center text-black z-20 p-2 font-bold text-xl">
                 <li className="flex items-center tracking-[3px] mb-5 transition-all translate-x-3 duration-300 hover:translate-x-5 text-center hover:text-green-600 cursor-pointer">
                     <Link href="/Characters">
-                    Characters
+                        Characters
                     </Link>
                 </li>
             </ul>
