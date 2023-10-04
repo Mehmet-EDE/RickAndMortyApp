@@ -4,7 +4,7 @@ import Link from "next/link"
 function Sidebar() {
     return (
         <div
-            className="w-[250px] h-screen bg-black relative overflow-hidden flex items-start justify-center">
+            className="w-[250px]  h-screen bg-black sticky top-0 overflow-hidden flex items-start justify-center">
             <div
                 className="w-24 h-24 rounded-full bg-red overflow-hidden z-20 mt-14 border-[5px] border-white"
             >
@@ -18,11 +18,6 @@ function Sidebar() {
                     <Link href="/Characters">
                     Characters
                     </Link>
-                </li>
-                <li className="flex w-full items-center tracking-[3px] flex-nowrap mb-5 transition-all translate-x-3 duration-300 hover:translate-x-5 text-center hover:text-green-600 cursor-pointer">
-                <Link href="/Locations">
-                    Locations
-                </Link>
                 </li>
             </ul>
             <ul className="absolute flex bottom-0 left-10 text-white text-xs z-20 p-2">
