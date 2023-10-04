@@ -21,10 +21,6 @@ function HomePage() {
       <div className={`rsm:${false ? 'hidden' : 'block'}  sm:block md:block lg:block`}>
         <Sidebar hide={hide} />
       </div>
-        <Hamburger hideValue={setHide} />
-      <div className="w-full z-50 bg-edeColor p-4 h-screen flex-wrap justify-center overflow-x-hidden rsm:overflow-y-scroll rmd:overflow-y-scroll rlg:overflow-y-scroll">
-        <Characters />
-      </div>
     </div>
   );
 }

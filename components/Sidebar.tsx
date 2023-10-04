@@ -8,8 +8,8 @@ interface SidebarProps {
 function Sidebar({ hide }: SidebarProps) {
     if (hide) return (<div />)
     return (
-        <div className={`rsm:hidden w-[250px]  h-screen bg-black sticky top-0 overflow-hidden flex items-start justify-center`}>
-            <div className=" rsm:hidden w-24 h-24 rounded-full bg-red overflow-hidden z-20 mt-14 border-[5px] border-white"
+        <div className={` w-[250px] rsm:z-50 rsm:absolute  h-screen bg-black sticky top-0 overflow-hidden flex items-start justify-center`}>
+            <div className=" rsm:w-[950px]  w-24 h-24 rounded-full bg-red overflow-hidden z-20 mt-14 border-[5px] border-white"
             >
                 <Image
                     src="/pp.png"
