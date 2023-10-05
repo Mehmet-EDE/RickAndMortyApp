@@ -15,7 +15,7 @@ const Card = ({ cardId, title, episode, location, imageUrl }: CardProps) => {
     };
     return (
         <div id={cardId} onClick={handleCardClick} className="m-5 p-5 w-72 cursor-pointer min-h-[370px] rounded-lg bg-gray-800 shadow-lg transition-transform duration-400 hover:-translate-y-1">
-            <div className="card-image h3/4 min-h-3/5 bg-gray-800 rounded-md">
+            <div className="h3/4 min-h-3/5 bg-gray-800 rounded-md">
                 <Image className='w-full cursor-pointer' src={`${imageUrl}`}
                     width={175}
                     height={170}

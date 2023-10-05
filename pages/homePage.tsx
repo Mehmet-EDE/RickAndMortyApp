@@ -1,9 +1,7 @@
 "use client";
 
 import Sidebar from "@/components/Sidebar";
-import Characters from "./Characters";
 import { useEffect, useState } from "react";
-import Hamburger from "@/components/Hamburger/Hamburger";
 
 
 function HomePage() {
@@ -18,9 +16,9 @@ function HomePage() {
   }, [])
   return (
     <div className='w-full h-screen flex items-center justify-center ' >
-      <div className={`rsm:${false ? 'hidden' : 'block'}  sm:block md:block lg:block`}>
+      {/* <div className={`rsm:${false ? 'hidden' : 'block'}  sm:block md:block lg:block`}>
         <Sidebar hide={hide} />
-      </div>
+      </div> */}
     </div>
   );
 }

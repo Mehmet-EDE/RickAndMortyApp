@@ -17,7 +17,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       }
     };
 
-    handleResize(); 
+    handleResize();
 
     window.addEventListener('resize', handleResize);
 
@@ -28,9 +28,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <div className="flex">
-      <Sidebar hide={hide} />
-      <div className={`rsm:${false ? 'hidden' : 'block'} fixed top-0 p-2 -right-3`}>
-      <Hamburger hideValue={setHide} />
+      <div className="sticky top-0 h-screen">
+        <Sidebar hide={hide} />
+      </div>
+      <div className={`rsm:${false ? 'hidden' : 'block'} fixed top-0 p-2 right-3`}>
+        <Hamburger hideValue={setHide} />
       </div>
       <main className="flex-1">
         <Component {...pageProps} />
