@@ -24,7 +24,7 @@ interface Character {
     episode: {
         id: number;
         name: string;
-    }
+    }[]
     image: string;
 }
 function CharacterDetail() {
@@ -90,7 +90,7 @@ function CharacterDetail() {
                     <b className="text-2xl text-center">Name:</b>
                     <b className="card-title text-lg text-center font-semibold mt-2 p-2 "> {character.name} </b>
                 </div>
-                    <hr />
+                <hr />
                 <div className="mt-4 flex flex-wrap space-x-8">
                     <div className="flex-1">
                         <div className="text-center">
