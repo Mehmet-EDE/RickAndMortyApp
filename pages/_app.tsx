@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { AppProps } from 'next/app';
 import Hamburger from '@/components/Hamburger';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function Home({ Component, pageProps }: AppProps) {
   const [hide, setHide] = useState(false);
 
   useEffect(() => {
