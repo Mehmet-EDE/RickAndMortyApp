@@ -26,8 +26,8 @@ const Card = ({ cardId, title, episode, location, imageUrl }: CardProps) => {
             <div>
                 <div>
 
-                    <b className="text-2xl">Name : </b>
-                    <b className="card-title text-lg font-semibold mt-3"> {title} </b>
+                    <b className="text-2xl text-white">Name : </b>
+                    <b className="card-title text-white text-lg font-semibold mt-3"> {title} </b>
                 </div>
                 <div>
                     <b className="text-2xl">Number Of Episodes </b>
@@ -37,7 +37,7 @@ const Card = ({ cardId, title, episode, location, imageUrl }: CardProps) => {
                 </div>
                 <div>
                     <p className="footer float-right mt-4 text-gray-500 text-lg">
-                        Last Known Location: <span className="by-name font-bold"> {location} </span>
+                        Last Known Location: <span className="text-white font-bold"> {location} </span>
                     </p>
                 </div>
             </div>
