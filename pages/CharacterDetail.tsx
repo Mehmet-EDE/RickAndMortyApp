@@ -4,6 +4,7 @@ import { gql } from '@apollo/client';
 import { client } from '@/lib/apollo';
 import Image from "next/image";
 import { Key } from "react";
+import Loading from "@/components/Loading";
 
 interface Character {
     id: number;
@@ -61,7 +62,7 @@ function CharacterDetail() {
         client,
     });
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <Loading />;
     if (error) {
         console.error('GraphQL Error:', error);
         return <p>Error: {error.message}</p>;

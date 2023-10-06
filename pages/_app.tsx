@@ -2,7 +2,7 @@ import Sidebar from '@/components/Sidebar';
 import '../app/globals.css';
 import { useEffect, useState } from "react";
 import type { AppProps } from 'next/app';
-import Hamburger from '@/components/Hamburger/Hamburger';
+import Hamburger from '@/components/Hamburger';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [hide, setHide] = useState(false);
