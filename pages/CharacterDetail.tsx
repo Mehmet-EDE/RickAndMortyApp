@@ -62,7 +62,11 @@ function CharacterDetail() {
         client,
     });
 
-    if (loading) return <Loading />;
+    if (loading) return (
+        <div className='flex justify-center flex-wrap items-center w-full'>
+            <Loading />
+        </div>
+    );
     if (error) {
         console.error('GraphQL Error:', error);
         return <p>Error: {error.message}</p>;
