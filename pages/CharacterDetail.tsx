@@ -127,65 +127,6 @@ function CharacterDetail() {
                 </div>
             </div>
         </div>
-
-
-
-
-        // <div className="flex flex-col h-screen">
-        //     <div className="flex items-center justify-around w-full">
-        //         <div>
-        //             <b className="text-2xl">Name : </b>
-        //             <b className="card-title text-lg font-semibold mt-3"> {character.name} </b>
-        //         </div>
-        //         <Image
-        //             src={character.image}
-        //             width={500}
-        //             height={500}
-        //             objectFit="cover"
-        //             alt=''
-        //         />
-        //     </div>
-
-        //     <div className="flex-4/5 flex flex-row justify-around p-4">
-        //         <div className="flex-1/2">
-
-
-        //             <div className="w-full bg-gray-200 p-4 rounded-lg shadow-lg mb-4 text-center">
-        //                 <b className="text-2xl text-black">Episodes With The Character </b>
-        //                 {character.episode.slice(0, 5).map((item: { id: number; name: string }) => (
-        //                     <div key={item.id} >
-        //                         <p className="text-black text-xl text-center list-disc">{item.name}</p>
-        //                     </div>
-        //                 ))}
-        //                 {character.episode.length > 5 && (
-        //                     <div className="w-full">
-        //                         <p className="text-black text-xl text-center">... Diğerleri</p>
-        //                     </div>
-        //                 )}
-        //             </div>
-        //         </div>
-        //         <div className="flex-4/5 bg-gray-200 p-4 rounded-lg h-fit shadow-lg">
-        //             <div style={{ height: '3rem' }}>
-        //                 <b className="mt-4 text-gray-500 text-lg">Last Known Location :</b>
-        //                 <p className="text-black text-xl text-center list-disc overflow-hidden overflow-ellipsis" style={{ height: '100%' }}>
-        //                     {character.location.name}
-        //                 </p>
-        //             </div>
-        //         </div>
-
-
-        //         <div className="flex-1/2">
-        //             <div className="w-full bg-gray-200 p-4 rounded-lg shadow-lg mb-4">
-        //                 <div style={{ height: '3rem' }}>
-        //                     <b className="mt-4 text-gray-500 text-lg">Character's Dimension :</b>
-        //                     <p className="text-black text-xl text-center list-disc overflow-hidden overflow-ellipsis" style={{ height: '100%' }}>
-        //                         {character.location.dimension}
-        //                     </p>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 

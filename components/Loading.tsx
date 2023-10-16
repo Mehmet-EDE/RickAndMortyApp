@@ -9,13 +9,13 @@ function Loading() {
             const animation = lottie.loadAnimation({
                 container: containerRef.current,
                 animationData,
-                renderer: 'svg', // veya 'canvas' kullanabilirsiniz
+                renderer: 'svg',
                 loop: true,
                 autoplay: true,
             });
 
             return () => {
-                animation.destroy(); // Bileşen temizlendiğinde animasyonu yok edin
+                animation.destroy();
             };
         }
     }, []);
