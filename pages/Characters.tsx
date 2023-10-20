@@ -53,7 +53,7 @@ function CenterPage() {
 
 
   return (
-    <div className='flex justify-between flex-wrap bg-black'>
+    <div className='flex justify-between flex-wrap bg-black rsm:items-center rsm:justify-center'>
       {characters.map((character: any) => (
         <Card
           cardId={character.id.toString()}
