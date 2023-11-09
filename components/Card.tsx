@@ -30,7 +30,7 @@ const Card = ({ cardId, title, episode, location, imageUrl }: CardProps) => {
                     <b className="card-title text-white text-lg font-semibold mt-3"> {title} </b>
                 </div>
                 <div>
-                    <b className="text-2xl text-black">Number Of Episodes </b>
+                    <b className="text-2xl text-white">Number Of Episodes </b>
                     <p className=" text-white text-xl text-center">
                         {episode}
                     </p>
