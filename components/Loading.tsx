@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import lottie from 'lottie-web';
 import animationData from '@/assets/loading.json'
 function Loading() {
     const containerRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         if (containerRef.current) {
+            const lottie = require('lottie-web');
             const animation = lottie.loadAnimation({
                 container: containerRef.current,
                 animationData,

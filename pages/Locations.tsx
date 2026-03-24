@@ -1,46 +1,41 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { client } from '@/lib/apollo';
-import Card from '@/components/Card';
-import SkeletonCard from '@/components/SkeletonCard';
+import LocationCard from '@/components/LocationCard';
+import SkeletonListCard from '@/components/SkeletonListCard';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const GET_CHARACTERS = gql`
-  query GetCharacters($page: Int, $filter: FilterCharacter) {
-    characters(page: $page, filter: $filter) {
+const GET_LOCATIONS = gql`
+  query GetLocations($page: Int, $filter: FilterLocation) {
+    locations(page: $page, filter: $filter) {
       info {
         next
       }
       results {
         id
         name
-        image
-        location {
+        type
+        dimension
+        residents {
           id
-          name
-        }
-        episode {
-          id
-          name
         }
       }
     }
   }
 `;
 
-interface CharacterItem {
+interface LocationItem {
   id: string;
   name: string;
-  image: string;
-  location: { id: string; name: string };
-  episode: { id: string; name: string }[];
+  type: string;
+  dimension: string;
+  residents: { id: string }[];
 }
 
-function CenterPage() {
+export default function Locations() {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState(''); // '', 'Alive', 'Dead', 'unknown'
 
   // Debounce logic
   useEffect(() => {
@@ -52,9 +47,8 @@ function CenterPage() {
 
   const filterParams: any = {};
   if (debouncedSearchTerm) filterParams.name = debouncedSearchTerm;
-  if (statusFilter) filterParams.status = statusFilter;
 
-  const { loading, error, data, fetchMore } = useQuery(GET_CHARACTERS, { 
+  const { loading, error, data, fetchMore } = useQuery(GET_LOCATIONS, { 
     client,
     variables: { 
       page: 1,
@@ -68,20 +62,20 @@ function CenterPage() {
 
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
-    if (target.isIntersecting && data?.characters?.info?.next && !loading) {
+    if (target.isIntersecting && data?.locations?.info?.next && !loading) {
       fetchMore({
         variables: {
-          page: data.characters.info.next,
+          page: data.locations.info.next,
           filter: Object.keys(filterParams).length > 0 ? filterParams : undefined
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
           return {
-            characters: {
-              ...fetchMoreResult.characters,
+            locations: {
+              ...fetchMoreResult.locations,
               results: [
-                ...prev.characters.results,
-                ...fetchMoreResult.characters.results,
+                ...prev.locations.results,
+                ...fetchMoreResult.locations.results,
               ],
             },
           };
@@ -114,59 +108,48 @@ function CenterPage() {
     });
   }
 
-  const characters = data?.characters?.results || [];
-  const isInitialLoading = loading && characters.length === 0;
+  const locations = data?.locations?.results || [];
+  const isInitialLoading = loading && locations.length === 0;
 
   return (
     <div className='flex flex-col items-center w-full min-h-screen'>
       
-      {/* Search & Filter Header */}
+      {/* Search Header */}
       <div className="w-full max-w-5xl px-4 py-8 flex flex-col items-center relative z-10 pt-12">
-         <h1 className="text-4xl text-white font-black mb-8 tracking-tight drop-shadow-lg text-center">Karakter Arşivi</h1>
+         <h1 className="text-4xl text-white font-black mb-8 tracking-tight drop-shadow-lg text-center">Gezegen ve Mekan Arşivi</h1>
          <div className="flex flex-col md:flex-row w-full gap-4 relative">
             <input 
               type="text" 
-              placeholder="Karakter adı yazın... (Örn: Rick)" 
+              placeholder="Bir mekan arayın... (Örn: Earth)" 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-grow bg-[#161b22] border border-gray-700/50 text-white rounded-xl px-6 py-4 focus:outline-none focus:border-green-500 transition-all shadow-lg placeholder-gray-500 font-medium"
             />
-            <select 
-              value={statusFilter} 
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="bg-[#161b22] border border-gray-700/50 text-white rounded-xl px-6 py-4 focus:outline-none focus:border-green-500 transition-colors shadow-lg cursor-pointer font-medium appearance-none"
-              style={{ backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2322C55E%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.5rem top 50%', backgroundSize: '0.65rem auto', paddingRight: '3rem' }}
-            >
-              <option value="">Evrendeki Tüm Durumlar</option>
-              <option value="Alive">🟢 Yaşıyor (Alive)</option>
-              <option value="Dead">🔴 Ölü (Dead)</option>
-              <option value="unknown">⚪ Bilinmiyor</option>
-            </select>
          </div>
       </div>
 
       {isInitialLoading ? (
         <div className='flex justify-center flex-wrap p-4 md:p-8 gap-4 w-full max-w-[1600px]'>
           {Array.from({ length: 8 }).map((_, idx) => (
-            <SkeletonCard key={idx} />
+            <SkeletonListCard key={idx} />
           ))}
         </div>
       ) : (
         <>
           <div className='flex justify-center flex-wrap p-4 md:p-8 gap-4 rsm:items-center w-full max-w-[1600px]'>
-            {characters.length === 0 && !loading && (
+            {locations.length === 0 && !loading && (
               <div className="text-gray-400 text-xl font-medium mt-10 text-center">
-                Aradığınız kriterlere uygun karakter bulunamadı.
+                Aradığınız mekan bulunamadı.
               </div>
             )}
-            {characters.map((character: CharacterItem) => (
-              <Card
-                cardId={character.id.toString()}
-                key={character.id}
-                title={character.name}
-                episode={character.episode.length}
-                location={character.location.name}
-                imageUrl={character.image}
+            {locations.map((loc: LocationItem) => (
+              <LocationCard
+                key={loc.id}
+                locationId={loc.id}
+                name={loc.name}
+                type={loc.type}
+                dimension={loc.dimension}
+                residentCount={loc.residents.length}
               />
             ))}
           </div>
@@ -176,10 +159,10 @@ function CenterPage() {
             {loading && data ? (
               <div className="flex items-center space-x-2 text-green-500 font-bold">
                 <span className="w-4 h-4 rounded-full bg-green-500 animate-pulse"></span>
-                <span>Daha Fazla Karakter Aranıyor...</span>
+                <span>Daha Fazla Mekan Yükleniyor...</span>
               </div>
-            ) : data?.characters?.info?.next === null && characters.length > 0 ? (
-              <p className="text-gray-500 font-medium">Bu kriterlerde evrenin sonuna ulaştınız ({characters.length})</p>
+            ) : data?.locations?.info?.next === null && locations.length > 0 ? (
+              <p className="text-gray-500 font-medium">Tüm mekanlar listelendi ({locations.length})</p>
             ) : null}
           </div>
         </>
@@ -187,5 +170,3 @@ function CenterPage() {
     </div>
   )
 }
-
-export default CenterPage
